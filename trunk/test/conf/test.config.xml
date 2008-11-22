@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ap:configuration xmlns:ap="http://www.agileplex.com/framework/configuration"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLoacation="http://www.agileplex.com/framework/configuration/configuration.xsd">
+    <ap:workflows>
+        <ap:stateflow id="simple_task" name="Simple task">
+            <ap:states>
+                <ap:state id="draft" name="Draft" />
+                <ap:state id="pendingImpl" name="Pending implementation" />
+                <ap:state id="in_impl" name="In implementation" />
+                <ap:state id="pendingVerification" name="Pending verification" />
+                <ap:state id="failed" name="Failed" />
+            </ap:states>
+            <ap:actions>
+                <ap:action id="create" name="Create" />
+                <ap:action id="submit" name="Submit" />
+                <ap:action id="start" name="Start" />
+                <ap:action id="finish" name="Finish" />
+                <ap:action id="pass" name="Pass" />
+                <ap:action id="fail" name="Fail" />
+                <ap:action id="restart" name="Restart" />
+            </ap:actions>
+            <ap:arcs>
+                <ap:arc id="postCreate" name="Post create" source="create" target="draft" />
+                <ap:arc id="preSubmit" name="Pre submit" source="draft" target="submit" />
+                <ap:arc id="postSubmit" name="Post submit" source="submit" target="pendingImpl" />
+                <ap:arc id="preStart" name="Pre start" source="pendingImpl" target="start" />
+                <ap:arc id="postStart" name="Post start" source="start" target="in_impl" />
+                <ap:arc id="preFinish" name="Pre finish" source="in_impl" target="finish" />
+                <ap:arc id="postFinish" name="Post finish" source="finsih" target="pendingVerification" />
+                <ap:arc id="prePass" name="Pre pass" source="pendingVerification" target="pass" />
+                <ap:arc id="preFail" name="Pre fail" source="pendingVerification" target="fail" />
+                <ap:arc id="postFail" name="Post fail" source="fail" target="failed" />
+                <ap:arc id="preRestart" name="Pre restart" source="failed" target="restart" />
+                <ap:arc id="postRestart" name="Post restart" source="restart" target="in_impl" />
+            </ap:arcs>
+        </ap:stateflow>
+        <ap:stateflow id="complex_task" name="Complex task">
+            <ap:states>
+                <ap:state id="chooseTasks" name="Choose tasks" />
+                <ap:state id="chooseResources" name="Choose resources" />
+                <ap:state id="draft" name="Draft" />
+                <ap:state id="pendingImpl" name="Pending implementation" />
+                <ap:state id="in_impl" name="In implementation" />
+                <ap:state id="inputManHour" name="Input man-hour" />
+                <ap:state id="pendingVerification" name="Pending verification" />
+                <ap:state id="chooseVerifiers" name="Choose verifiers" />
+                <ap:state id="inputVerifyingResult" name="Input verifying result" />
+                <ap:state id="failed" name="Failed" />
+            </ap:states>
+            <ap:actions>
+                <ap:action id="create" name="Create" />
+                <ap:action id="submit" name="Submit" />
+                <ap:action id="split" name="Split" />
+                <ap:action id="start" name="Start" />
+                <ap:action id="submitManHour" name="Submit man-hour" />
+                <ap:action id="finish" name="Finish" />
+                <ap:action id="notSure" name="Not sure" />
+                <ap:action id="pass" name="Pass" />
+                <ap:action id="Fail" name="Fail" />
+                <ap:action id="restart" name="Restart" />
+            </ap:actions>
+            <ap:arcs>
+                <ap:arc id="preCreateFromChooseTasks" name="Pre create" source="chooseTasks" target="create" />
+                <ap:arc id="preCreateFromChooseResources" name="Pre create" source="chooseResources" target="create" />
+                <ap:arc id="postCreate" name="Post create" source="create" target="draft" />
+                <ap:arc id="preSubmit" name="Pre submit" source="draft" target="submit" />
+                <ap:arc id="postSubmit" name="Post submit" source="submit" target="pendingImpl" />
+                <ap:arc id="preSplit" name="Pre split" source="pendingImpl" target="split" />
+                <ap:arc id="postSplit" name="Post split" source="split" target="draft" />
+                <ap:arc id="preStart" name="Pre start" source="pendingImpl" target="start" />
+                <ap:arc id="postStart" name="Post start" source="start" target="in_impl" />
+                <ap:arc id="preSubmitManHour" name="Pre submit man-hour" source="in_impl" target="submitManHour" />
+                <ap:arc id="postSubmitManHour" name="Post submit man-hour" source="submitManHour" target="in_impl" />
+                <ap:arc id="postInputManHour" name="Post input man-hour" source="inputManHour" target="submitManHour" />
+                <ap:arc id="preFinish" name="Pre finish" source="in_impl" target="finish" />
+                <ap:arc id="postFinish" name="Post finish" source="finsih" target="pendingVerification" />
+                <ap:arc id="postChooseVerifiers" name="Post choose verifiers" source="chooseVerifiers" target="in_impl" />
+                <ap:arc id="preNotSureFromPendingVerification" name="Pre not sure" source="pendingVerification" target="notSure" />
+                <ap:arc id="preNotSureFromInputVerifyingResult" name="Pre not sure" source="inputVerifyingResult" target="notSure" /> 
+                <ap:arc id="postNotSure" name="Post not sure" source="notSure" target="pendingVerification" />
+                <ap:arc id="prePassFromPendingVerification" name="Pre pass" source="pendingVerification" target="pass" />
+                <ap:arc id="prePassFromInputVerifyingResult" name="Pre pass" source="inputVerifyingResult" target="pass" />
+                <ap:arc id="preFailFromPendingVerification" name="Pre fail" source="pendingVerification" target="fail" />
+                <ap:arc id="preFailFromInputVerifyingResult" name="Pre fail" source="inputVerifyingResult" target="fail" />
+                <ap:arc id="postFail" name="Post fail" source="fail" target="failed" />
+                <ap:arc id="preRestart" name="Pre restart" source="failed" target="restart" />
+                <ap:arc id="postRestart" name="Post restart" source="restart" target="in_impl" />
+            </ap:arcs>
+        </ap:stateflow>
+    </ap:workflows>
+</ap:configuration>

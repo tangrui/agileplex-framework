@@ -12,15 +12,15 @@
 
    <extension point="org.eclipse.emf.ecore.generated_package">
       <package
-            uri="http://www.agileplex.com/specification/version-1.0/aff"
-            class="com.agileplex.specification.version._1._0.aff.AffPackage"
+            uri="http://www.agileplex.com/framework/configuration"
+            class="com.agileplex.framework.configuration.ConfigurationPackage"
             genModel="model/configuration.genmodel"/>
    </extension>
 
    <extension point="org.eclipse.emf.ecore.extension_parser">
       <parser
-            type="aff"
-            class="com.agileplex.specification.version._1._0.aff.util.AffResourceFactoryImpl"/>
+            type="configuration"
+            class="com.agileplex.framework.configuration.util.ConfigurationResourceFactoryImpl"/>
    </extension>
 
 </plugin>

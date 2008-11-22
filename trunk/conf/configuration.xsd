@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-    targetNamespace="http://www.agileplex.com/framework/specification"
-    xmlns="http://www.agileplex.com/framework/specification"
+    targetNamespace="http://www.agileplex.com/framework/configuration"
+    xmlns="http://www.agileplex.com/framework/configuration"
     elementFormDefault="qualified">
     
     <xs:complexType name="Configuration">
-        <xs:sequence>
-            <xs:element name="workflows" type="WorkflowCollection" minOccurs="0" maxOccurs="1" />
-        </xs:sequence>
+        <xs:all>
+            <xs:element name="workflows" type="WorkflowCollection" minOccurs="0" />
+        </xs:all>
         <xs:attribute name="version" type="xs:string" fixed="1.0" use="required" />
     </xs:complexType>
 
@@ -18,38 +18,56 @@
         </xs:sequence>
     </xs:complexType>
 
-    <xs:complexType name="ObjectBase" abstract="true">
+    <xs:complexType name="BaseObject" abstract="true">
         <xs:attribute name="id" type="xs:ID" use="required" />
         <xs:attribute name="name" type="xs:NCName" use="required" />
     </xs:complexType>
 
     <xs:complexType name="Stateflow">
         <xs:complexContent>
-            <xs:extension base="ObjectBase">
-                <xs:sequence>
-                    <xs:element name="state" type="State" minOccurs="0" maxOccurs="unbounded" />
-                    <xs:element name="action" type="Action" minOccurs="1" maxOccurs="unbounded" />
-                    <xs:element name="arc" type="Arc" minOccurs="0" maxOccurs="unbounded" />
-                </xs:sequence>
+            <xs:extension base="BaseObject">
+                <xs:all>
+                    <xs:element name="states" type="StateCollection" minOccurs="0" />
+                    <xs:element name="actions" type="ActionCollection" minOccurs="0" />
+                    <xs:element name="arcs" type="ArcCollection" minOccurs="0" />
+                </xs:all>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
 
+    <xs:complexType name="StateCollection">
+        <xs:sequence>
+            <xs:element name="state" type="State" minOccurs="0" maxOccurs="unbounded" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="ActionCollection">
+        <xs:sequence>
+            <xs:element name="action" type="Action" minOccurs="0" maxOccurs="unbounded" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="ArcCollection">
+        <xs:sequence>
+            <xs:element name="arc" type="Arc" minOccurs="0" maxOccurs="unbounded" />
+        </xs:sequence>
+    </xs:complexType>
+
     <xs:complexType name="State">
         <xs:complexContent>
-            <xs:extension base="ObjectBase" />
+            <xs:extension base="BaseObject" />
         </xs:complexContent>
     </xs:complexType>
 
     <xs:complexType name="Action">
         <xs:complexContent>
-            <xs:extension base="ObjectBase" />
+            <xs:extension base="BaseObject" />
         </xs:complexContent>
     </xs:complexType>
 
     <xs:complexType name="Arc">
         <xs:complexContent>
-            <xs:extension base="ObjectBase">
+            <xs:extension base="BaseObject">
                 <xs:attribute name="source" type="xs:IDREF" use="required" />
                 <xs:attribute name="target" type="xs:IDREF" use="required" />
             </xs:extension>

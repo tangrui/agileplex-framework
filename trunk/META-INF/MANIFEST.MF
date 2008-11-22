@@ -1,15 +1,15 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
-Bundle-SymbolicName: afc;singleton:=true
+Bundle-SymbolicName: agileplex_framework;singleton:=true
 Bundle-Version: 1.0.0
 Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Export-Package: com.agileplex.specification.version._1._0.aff,
- com.agileplex.specification.version._1._0.aff.impl,
- com.agileplex.specification.version._1._0.aff.util
+Export-Package: com.agileplex.framework.configuration,
+ com.agileplex.framework.configuration.impl,
+ com.agileplex.framework.configuration.util
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport,
  org.eclipse.emf.ecore.xmi;visibility:=reexport
