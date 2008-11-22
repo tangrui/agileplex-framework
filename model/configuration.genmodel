@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/afc/src"
+    modelPluginID="afc" modelName="Configuration" importerID="org.eclipse.xsd.ecore.importer"
+    complianceLevel="6.0" copyrightFields="false">
+  <foreignModel>../conf/configuration.xsd</foreignModel>
+  <genPackages prefix="Specification" basePackage="com.agileplex.framework" resource="XML"
+      disposableProviderFactory="true" ecorePackage="specification.ecore#/">
+    <genClasses ecoreClass="specification.ecore#//Action"/>
+    <genClasses ecoreClass="specification.ecore#//Arc">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute specification.ecore#//Arc/source"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute specification.ecore#//Arc/target"/>
+    </genClasses>
+    <genClasses ecoreClass="specification.ecore#//Configuration">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference specification.ecore#//Configuration/workflows"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute specification.ecore#//Configuration/version"/>
+    </genClasses>
+    <genClasses ecoreClass="specification.ecore#//DocumentRoot">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EAttribute specification.ecore#//DocumentRoot/mixed"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference specification.ecore#//DocumentRoot/xMLNSPrefixMap"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference specification.ecore#//DocumentRoot/xSISchemaLocation"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference specification.ecore#//DocumentRoot/configuration"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="specification.ecore#//ObjectBase">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute specification.ecore#//ObjectBase/id"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute specification.ecore#//ObjectBase/name"/>
+    </genClasses>
+    <genClasses ecoreClass="specification.ecore#//State"/>
+    <genClasses ecoreClass="specification.ecore#//Stateflow">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference specification.ecore#//Stateflow/state"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference specification.ecore#//Stateflow/action"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference specification.ecore#//Stateflow/arc"/>
+    </genClasses>
+    <genClasses ecoreClass="specification.ecore#//WorkflowCollection">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference specification.ecore#//WorkflowCollection/stateflow"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    targetNamespace="http://www.agileplex.com/framework/specification"
+    xmlns="http://www.agileplex.com/framework/specification"
+    elementFormDefault="qualified">
+    
+    <xs:complexType name="Configuration">
+        <xs:sequence>
+            <xs:element name="workflows" type="WorkflowCollection" minOccurs="0" maxOccurs="1" />
+        </xs:sequence>
+        <xs:attribute name="version" type="xs:string" fixed="1.0" use="required" />
+    </xs:complexType>
+
+    <xs:complexType name="WorkflowCollection">
+        <xs:sequence>
+            <xs:element name="stateflow" type="Stateflow" minOccurs="0" maxOccurs="unbounded" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="ObjectBase" abstract="true">
+        <xs:attribute name="id" type="xs:ID" use="required" />
+        <xs:attribute name="name" type="xs:NCName" use="required" />
+    </xs:complexType>
+
+    <xs:complexType name="Stateflow">
+        <xs:complexContent>
+            <xs:extension base="ObjectBase">
+                <xs:sequence>
+                    <xs:element name="state" type="State" minOccurs="0" maxOccurs="unbounded" />
+                    <xs:element name="action" type="Action" minOccurs="1" maxOccurs="unbounded" />
+                    <xs:element name="arc" type="Arc" minOccurs="0" maxOccurs="unbounded" />
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="State">
+        <xs:complexContent>
+            <xs:extension base="ObjectBase" />
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="Action">
+        <xs:complexContent>
+            <xs:extension base="ObjectBase" />
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="Arc">
+        <xs:complexContent>
+            <xs:extension base="ObjectBase">
+                <xs:attribute name="source" type="xs:IDREF" use="required" />
+                <xs:attribute name="target" type="xs:IDREF" use="required" />
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:element name="configuration" type="Configuration" />
+</xs:schema>
+
