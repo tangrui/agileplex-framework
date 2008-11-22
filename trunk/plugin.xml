@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+ <copyright>
+ </copyright>
+
+ $Id$
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="http://www.agileplex.com/specification/version-1.0/aff"
+            class="com.agileplex.specification.version._1._0.aff.AffPackage"
+            genModel="model/configuration.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.extension_parser">
+      <parser
+            type="aff"
+            class="com.agileplex.specification.version._1._0.aff.util.AffResourceFactoryImpl"/>
+   </extension>
+
+</plugin>
