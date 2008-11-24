@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <ap:configuration xmlns:ap="http://www.agileplex.com/framework/configuration"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLoacation="http://www.agileplex.com/framework/configuration/configuration.xsd">
+    version="1.0">
     <ap:workflows>
         <ap:stateflow id="simple_task" name="Simple task">
             <ap:states>

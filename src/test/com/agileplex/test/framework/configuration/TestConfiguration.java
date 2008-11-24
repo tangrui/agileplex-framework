@@ -1,6 +1,7 @@
 package com.agileplex.test.framework.configuration;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Collections;
 
@@ -9,9 +10,11 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.XMLResource;
+import org.testng.Assert;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import com.agileplex.framework.Framework;
 import com.agileplex.framework.configuration.Action;
 import com.agileplex.framework.configuration.ActionCollection;
 import com.agileplex.framework.configuration.Arc;
@@ -23,11 +26,11 @@ import com.agileplex.framework.configuration.StateCollection;
 import com.agileplex.framework.configuration.Stateflow;
 import com.agileplex.framework.configuration.WorkflowCollection;
 import com.agileplex.framework.configuration.util.ConfigurationResourceFactoryImpl;
+import com.agileplex.framework.impl.FrameworkImpl;
 
 public class TestConfiguration {
 
 	@Parameters({"configuration-file-name"})
-	@Test
 	public void testBuildConfiguration(String fileName) {
 		ConfigurationFactory factory = ConfigurationFactory.eINSTANCE;
 		
@@ -87,5 +90,23 @@ public class TestConfiguration {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	@Parameters({"configuration-file-name"})
+	@Test
+	public void testLoadConfiguration(String fileName) throws FileNotFoundException {
+		File file = new File(fileName);
+		Framework framework = new FrameworkImpl(file);
+		com.agileplex.framework.configuration.Configuration cfg = framework.getConfiguration();
+		Assert.assertEquals(cfg.getVersion(), "1.0");
+		
+		WorkflowCollection workflows = cfg.getWorkflows();
+		Assert.assertEquals(workflows.getStateflows().size(), 2);
+		
+		Stateflow sf1 = workflows.getStateflows().get(0);
+		Assert.assertEquals(sf1.getId(), "simple_task");
+		
+		Stateflow sf2 = workflows.getStateflows().get(1);
+		Assert.assertEquals(sf2.getId(), "complex_task");
 	}
 }
