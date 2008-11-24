@@ -3,7 +3,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
 <suite name="ConfigurationSuite" verbose="1">
-    <parameter name="configuration-file-name" value="system.config.xml" />
+    <parameter name="configuration-file-name" value="E:\home\tangrui\workspace\agileplex\agileplex-framework\test\conf\system.config.xml" />
     <test name="ConfigurationTest">
         <packages>
             <package name="com.agileplex.test.framework.configuration" />
